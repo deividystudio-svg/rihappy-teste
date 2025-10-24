@@ -1,0 +1,16 @@
+from flask import Flask, render_template, request
+from buscar_rihappy import buscar_produto  # usamos seu código intacto
+
+app = Flask(__name__)
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    produtos = []
+    if request.method == "POST":
+        termo = request.form.get("termo")
+        if termo:
+            produtos = buscar_produto(termo)  # chama seu código
+    return render_template("index.html", produtos=produtos)
+
+if __name__ == "__main__":
+    app.run(debug=True)
