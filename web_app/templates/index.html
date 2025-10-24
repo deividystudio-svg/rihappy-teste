@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Busca RiHappy</title>
+</head>
+<body>
+    <h1>Buscar produto</h1>
+    <form method="POST">
+        <input type="text" name="termo" placeholder="Digite o nome ou código" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% for p in produtos %}
+    <hr>
+    <h2>{{ p.nome }}</h2>
+    <p><strong>EAN:</strong> {{ p.ean }}</p>
+    <p><strong>Código interno:</strong> {{ p.codigo_interno }}</p>
+    <img src="{{ p.imagem }}" alt="Imagem do produto" width="200">
+    {% endfor %}
+</body>
+</html>
