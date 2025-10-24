@@ -11,16 +11,14 @@
         <button type="submit">Buscar</button>
     </form>
 
-    {% for p in produtos %}
-    <hr>
-    <h2>{{ p.nome }}</h2>
-    <p><strong>EAN:</strong> {{ p.ean }}</p>
-    <p><strong>Código interno:</strong> {{ p.codigo_interno }}</p>
-    <img src="{{ p.imagem }}" alt="Imagem do produto" width="200">
-    {% if p.barcode %}
-    <p><strong>Código de barras:</strong></p>
-    <img src="data:image/png;base64,{{ p.barcode }}" alt="Código de barras">
+    {% if produtos %}
+        {% for p in produtos %}
+            <hr>
+            <h2>{{ p.nome }}</h2>
+            <p><strong>EAN:</strong> {{ p.ean }}</p>
+            <p><strong>Código interno:</strong> {{ p.codigo_interno }}</p>
+            <img src="{{ p.imagem }}" alt="Imagem do produto" width="200">
+        {% endfor %}
     {% endif %}
-    {% endfor %}
 </body>
 </html>

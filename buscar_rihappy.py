@@ -1,6 +1,4 @@
 import requests
-from barcode import Code128
-from barcode.writer import ImageWriter
 
 def buscar_produto(busca):
     url = "https://www.rihappy.com.br/_v/segment/graphql/v1"
@@ -48,9 +46,5 @@ def buscar_produto(busca):
             "imagem": imagem_produto,
             "ean": ean
         })
-
-        # Gerar código de barras
-        if codigo_interno != "sem código interno":
-            Code128(codigo_interno, writer=ImageWriter()).write(open(f"{codigo_interno}.png", "wb"))
 
     return resultados
