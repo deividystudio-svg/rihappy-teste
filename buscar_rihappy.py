@@ -1,3 +1,4 @@
+# buscar_rihappy.py
 import requests
 from barcode import Code128
 from barcode.writer import ImageWriter
@@ -43,19 +44,16 @@ def buscar_produto(busca):
         imagem_produto = imagens[0].get("imageUrl", "sem imagem") if imagens else "sem imagem"
         ean = items[0].get("ean", "sem EAN") if items else "sem EAN"
 
-        # Opcional: gerar código de barras (atenção ao Render, pode precisar de pasta /tmp/)
-        if codigo_interno != "sem código interno":
-            barcode_image = f"/tmp/{codigo_interno}.png"  # Render só permite escrever em /tmp
-            Code128(codigo_interno, writer=ImageWriter()).write(open(barcode_image, "wb"))
-        else:
-            barcode_image = None
-
         resultados.append({
             "nome": nome,
             "codigo_interno": codigo_interno,
             "imagem": imagem_produto,
-            "ean": ean,
-            "barcode": barcode_image
+            "ean": ean
         })
+
+        # Gerar código de barras (opcional)
+        if codigo_interno != "sem código interno":
+            barcode_image = f"{codigo_interno}.png"
+            Code128(codigo_interno, writer=ImageWriter()).write(open(barcode_image, "wb"))
 
     return resultados

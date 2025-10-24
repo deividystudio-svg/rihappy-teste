@@ -1,5 +1,6 @@
+# app.py
 from flask import Flask, render_template, request
-from buscar_rihappy import buscar_produto  # importa seu código existente
+from buscar_rihappy import buscar_produto
 
 app = Flask(__name__)
 
@@ -7,7 +8,7 @@ app = Flask(__name__)
 def index():
     produtos = []
     if request.method == "POST":
-        termo = request.form["termo"]
+        termo = request.form.get("termo")
         produtos = buscar_produto(termo)
     return render_template("index.html", produtos=produtos)
 
