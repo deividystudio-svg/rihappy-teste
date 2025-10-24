@@ -1,11 +1,9 @@
-# buscar_rihappy.py
 import requests
 from barcode import Code128
 from barcode.writer import ImageWriter
 
 def buscar_produto(busca):
     url = "https://www.rihappy.com.br/_v/segment/graphql/v1"
-
     payload = {
         "operationName": "productSearchV3",
         "variables": {
@@ -51,9 +49,8 @@ def buscar_produto(busca):
             "ean": ean
         })
 
-        # Gerar código de barras (opcional)
+        # Gerar código de barras
         if codigo_interno != "sem código interno":
-            barcode_image = f"{codigo_interno}.png"
-            Code128(codigo_interno, writer=ImageWriter()).write(open(barcode_image, "wb"))
+            Code128(codigo_interno, writer=ImageWriter()).write(open(f"{codigo_interno}.png", "wb"))
 
     return resultados
